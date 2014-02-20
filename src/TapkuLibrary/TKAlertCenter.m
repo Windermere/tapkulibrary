@@ -242,6 +242,9 @@
 	
 }
 - (void) postAlertWithMessage:(NSString*)message image:(UIImage*)image{
+    if ([self isAlreadyShowingAlertForMessage:message image:image])
+        return;
+
 	if(message && image)
 		[_alerts addObject:@[message,image]];
 	else if(message)
@@ -254,6 +257,32 @@
 	[self postAlertWithMessage:message image:nil];
 }
 
+-(Boolean) isAlreadyShowingAlertForMessage:(NSString *) message image:(UIImage *) image {
+    Boolean imageSame = NO;
+    Boolean messageSame = NO;
+    for (NSArray *alert in _alerts) {
+        NSString *alertMessage;
+        UIImage *alertImage;
+
+        alertMessage = alert[0];
+        if (alert.count == 2) {
+            alertImage = alert[1];
+        }
+
+        messageSame = ([message isEqualToString:alertMessage]);
+        if (messageSame) {
+            if (image && alertImage) {
+                imageSame = (image.size.width == alertImage.size.width && 
+                	image.size.height == alertImage.size.height);
+            } else if (!image && !alertImage)
+                imageSame = YES;
+        }
+        if (imageSame && messageSame)
+            break;
+    }
+
+    return (imageSame && messageSame);
+}
 
 #pragma mark System Observation Changes
 CGRect subtractRect(CGRect wf,CGRect kf);
