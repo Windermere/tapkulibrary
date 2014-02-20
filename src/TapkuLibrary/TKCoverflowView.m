@@ -288,9 +288,9 @@
 	
 	CGFloat per = point.x / self.contentSize.width;
 	CGFloat ind = _numberOfCovers * per;
-	CGFloat mi = ind / (_numberOfCovers/2);
+	CGFloat mi = ind / (_numberOfCovers/2.0);
 	mi = 1 - mi;
-	mi = mi / 2;
+	mi = mi / 2.0;
 	NSInteger index = (int)(ind+mi);
 	
 	index = MIN(MAX(0,index),_numberOfCovers-1);
