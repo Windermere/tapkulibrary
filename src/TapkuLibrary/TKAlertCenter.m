@@ -189,9 +189,9 @@
 	
 	UIInterfaceOrientation o = [UIApplication sharedApplication].statusBarOrientation;
 	CGFloat degrees = 0;
-	if(o == UIInterfaceOrientationLandscapeLeft ) degrees = -90;
-	else if(o == UIInterfaceOrientationLandscapeRight ) degrees = 90;
-	else if(o == UIInterfaceOrientationPortraitUpsideDown) degrees = 180;
+//	if(o == UIInterfaceOrientationLandscapeLeft ) degrees = -90;
+//	else if(o == UIInterfaceOrientationLandscapeRight ) degrees = 90;
+//	else if(o == UIInterfaceOrientationPortraitUpsideDown) degrees = 180;
 	_alertView.transform = CGAffineTransformMakeRotation(degrees * M_PI / 180);
 	_alertView.transform = CGAffineTransformScale(_alertView.transform, 2, 2);
 	
@@ -222,9 +222,9 @@
 	
 	UIInterfaceOrientation o = [UIApplication sharedApplication].statusBarOrientation;
 	CGFloat degrees = 0;
-	if(o == UIInterfaceOrientationLandscapeLeft ) degrees = -90;
-	else if(o == UIInterfaceOrientationLandscapeRight ) degrees = 90;
-	else if(o == UIInterfaceOrientationPortraitUpsideDown) degrees = 180;
+//	if(o == UIInterfaceOrientationLandscapeLeft ) degrees = -90;
+//	else if(o == UIInterfaceOrientationLandscapeRight ) degrees = 90;
+//	else if(o == UIInterfaceOrientationPortraitUpsideDown) degrees = 180;
 	_alertView.transform = CGAffineTransformMakeRotation(degrees * M_PI / 180);
 	_alertView.transform = CGAffineTransformScale(_alertView.transform, 0.5, 0.5);
 	
