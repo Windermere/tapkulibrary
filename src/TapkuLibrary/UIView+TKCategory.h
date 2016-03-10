@@ -47,4 +47,12 @@
 
 - (UIImage*) snapshotImageAfterScreenUpdates:(BOOL)updates;
 
+- (void) setShadowWithOffset:(CGSize)offset opacity:(CGFloat)opacity radius:(CGFloat)radius;
+- (void) setShadowWithOffset:(CGSize)offset opacity:(CGFloat)opacity color:(UIColor*)color radius:(CGFloat)radius;
+- (void) setShadowWithPath:(UIBezierPath*)bezierPath offset:(CGSize)offset opacity:(CGFloat)opacity color:(UIColor*)color radius:(CGFloat)radius;
+- (void) setBorderWithColor:(UIColor*)color width:(CGFloat)width;
+
+@property (nonatomic,assign) CGFloat cornerRadius;
+
+
 @end

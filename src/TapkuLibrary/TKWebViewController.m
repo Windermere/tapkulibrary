@@ -32,6 +32,11 @@
 
 #import "TKWebViewController.h"
 #import "UIBarButtonItem+TKCategory.h"
+#import "UIDevice+TKCategory.h"
+
+@interface TKWebViewController ()
+@property (nonatomic,strong) UIBarButtonItem *loadingActivityBarButtonItem;
+@end
 
 @implementation TKWebViewController
 
@@ -64,35 +69,38 @@
 }
 
 #pragma mark Button Actions
-- (void) showActionSheet:(id)sender{
+- (void) showActionSheet:(UIBarButtonItem*)sender{
 	NSURL *currentURL = self.webView.request.URL;
 	UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[currentURL] applicationActivities:nil];
 	activityVC.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypeSaveToCameraRoll, UIActivityTypeAssignToContact];
-	[self presentViewController:activityVC animated:YES completion:nil];
+	
+	
+	if([UIDevice padIdiom]){
+		
+		UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityVC];
+		[popup presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+		
+	}else{
+		
+		[self presentViewController:activityVC animated:YES completion:nil];
+
+	}
+	
 }
 
 #pragma mark UIWebviewDelegate
 - (void) webViewDidStartLoad:(UIWebView *)webView{
-	
-	UIActivityIndicatorViewStyle style;
-	if(self.navigationController.navigationBar.barTintColor){
-		UIColor *clr = self.navigationController.navigationBar.barTintColor;
-		const CGFloat *componentColors = CGColorGetComponents(clr.CGColor);
-		CGFloat colorBrightness = ((componentColors[0] * 299) + (componentColors[1] * 587) + (componentColors[2] * 114)) / 1000;
-		style = colorBrightness < 0.6 ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray ;
-	}else{
-		style = UIActivityIndicatorViewStyleGray;
-	}
-	
-	self.navigationItem.rightBarButtonItem = [UIBarButtonItem activityItemWithIndicatorStyle:style];
-	
+	if(self.navigationItem.rightBarButtonItem == _actionBarButtonItem)
+		self.navigationItem.rightBarButtonItem = self.loadingActivityBarButtonItem;
 }
 - (void) webViewDidFinishLoad:(UIWebView *)webView {
-	self.navigationItem.rightBarButtonItem = self.actionBarButtonItem;
+	if(self.navigationItem.rightBarButtonItem == _loadingActivityBarButtonItem)
+		self.navigationItem.rightBarButtonItem = self.actionBarButtonItem;
 	self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-	self.navigationItem.rightBarButtonItem = self.actionBarButtonItem;
+	if(self.navigationItem.rightBarButtonItem == _loadingActivityBarButtonItem)
+		self.navigationItem.rightBarButtonItem = self.actionBarButtonItem;
 	self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
@@ -107,10 +115,32 @@
 }
 
 
+- (void) dismiss:(id)sender{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark Properties
 - (UIBarButtonItem*) actionBarButtonItem{
 	if(_actionBarButtonItem) return _actionBarButtonItem;
 	_actionBarButtonItem =  [UIBarButtonItem actionItemWithTarget:self action:@selector(showActionSheet:)];
 	return _actionBarButtonItem;
+}
+- (UIBarButtonItem*) loadingActivityBarButtonItem{
+	if(_loadingActivityBarButtonItem) return _loadingActivityBarButtonItem;
+	
+	UIActivityIndicatorViewStyle style;
+	if(self.navigationController.navigationBar.barTintColor){
+		UIColor *clr = self.navigationController.navigationBar.barTintColor;
+		const CGFloat *componentColors = CGColorGetComponents(clr.CGColor);
+		CGFloat colorBrightness = ((componentColors[0] * 299) + (componentColors[1] * 587) + (componentColors[2] * 114)) / 1000;
+		style = colorBrightness < 0.6 ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray ;
+	}else{
+		style = UIActivityIndicatorViewStyleGray;
+	}
+	
+	_loadingActivityBarButtonItem = [UIBarButtonItem activityItemWithIndicatorStyle:style];
+	return _loadingActivityBarButtonItem;
 }
 
 @end

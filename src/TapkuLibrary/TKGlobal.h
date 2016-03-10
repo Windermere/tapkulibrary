@@ -39,6 +39,8 @@
 #define TKBUNDLE(_URL) [TKGlobal fullBundlePath:[@"TapkuLibrary.bundle/Images" stringByAppendingPathComponent:_URL]]
 
 
+
+
 FOUNDATION_STATIC_INLINE CATransform3D CAScale(CGFloat x,CGFloat y,CGFloat z);
 FOUNDATION_STATIC_INLINE CATransform3D CAScale(CGFloat x,CGFloat y,CGFloat z){
 	return CATransform3DMakeScale(x,y,z);
@@ -94,7 +96,24 @@ FOUNDATION_STATIC_INLINE CGRect CGRectCompose(CGPoint origin, CGSize size){
 	CGRect r; r.origin = origin; r.size = size; return r;
 }
 
+FOUNDATION_STATIC_INLINE CGRect CGRectCenteredInRect(CGRect parentRect, CGSize size);
+FOUNDATION_STATIC_INLINE CGRect CGRectCenteredInRect(CGRect parentRect, CGSize size){
+    CGFloat minX = CGRectGetMinX(parentRect) + round((CGRectGetWidth(parentRect) - size.width) / 2);
+    CGFloat minY = CGRectGetMinY(parentRect) + round((CGRectGetHeight(parentRect) - size.height) / 2);
+    return CGRectMakeWithSize(minX, minY, size);
+}
 
+FOUNDATION_STATIC_INLINE CGRect CGRectXCenteredInRect(CGRect parentRect, CGFloat originY, CGSize size);
+FOUNDATION_STATIC_INLINE CGRect CGRectXCenteredInRect(CGRect parentRect, CGFloat originY, CGSize size){
+    CGFloat minX = CGRectGetMinX(parentRect) + round((CGRectGetWidth(parentRect) - size.width) / 2);
+    return CGRectMakeWithSize(minX, originY, size);
+}
+
+FOUNDATION_STATIC_INLINE CGRect CGRectYCenteredInRect(CGRect parentRect, CGFloat originX, CGSize size);
+FOUNDATION_STATIC_INLINE CGRect CGRectYCenteredInRect(CGRect parentRect, CGFloat originX, CGSize size){
+    CGFloat minY = CGRectGetMinY(parentRect) + round((CGRectGetHeight(parentRect) - size.height) / 2);
+    return CGRectMakeWithSize(originX, minY, size);
+}
 
 FOUNDATION_STATIC_INLINE CGPoint CGPointGetMidpoint(CGPoint p1,CGPoint p2);
 FOUNDATION_STATIC_INLINE CGPoint CGPointGetMidpoint(CGPoint p1,CGPoint p2){
@@ -155,6 +174,16 @@ FOUNDATION_STATIC_INLINE CGFloat CGFrameGetMidX(UIView *view){
 FOUNDATION_STATIC_INLINE CGFloat CGFrameGetMidY(UIView *view);
 FOUNDATION_STATIC_INLINE CGFloat CGFrameGetMidY(UIView *view){
 	return CGRectGetMidY(view.frame);
+}
+
+FOUNDATION_STATIC_INLINE NSValue* NSValueCATransform(CATransform3D transform);
+FOUNDATION_STATIC_INLINE NSValue* NSValueCATransform(CATransform3D transform){
+    return [NSValue valueWithCATransform3D:transform];
+}
+
+FOUNDATION_STATIC_INLINE NSValue* NSValueCGTransform(CGAffineTransform transform);
+FOUNDATION_STATIC_INLINE NSValue* NSValueCGTransform(CGAffineTransform transform){
+    return [NSValue valueWithCGAffineTransform:transform];
 }
 
 @interface TKGlobal : NSObject 

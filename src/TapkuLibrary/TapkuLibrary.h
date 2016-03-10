@@ -33,6 +33,8 @@
 #import "NSDate+TKCategory.h"
 #import "NSArray+TKCategory.h"
 #import "NSMutableArray+TKCategory.h"
+#import "NSAttributedString+TKCategory.h"
+#import "NSMutableAttributedString+TKCategory.h"
 #import "UIDevice+TKCategory.h"
 #import "UIScreen+TKCategory.h"
 #import "UIView+TKCategory.h"
@@ -50,6 +52,14 @@
 #import "UIGestureRecognizer+TKCategory.h"
 #import "UIFont+TKCategory.h"
 #import "UINavigationBar+TKCategory.h"
+#import "UILabel+TKCategory.h"
+#import "UIApplication+TKCategory.h"
+
+// Animations
+#import "UIView+TKAnimation.h"
+#import "CAAnimation+TKAnimation.h"
+#import "CALayer+TKAnimation.h"
+#import "CAKeyframeAnimation+TKAnimation.h"
 
 #import "TKWindow.h"
 #import "TKViewController.h"
@@ -66,6 +76,8 @@
 #import "TKSlideToUnlockView.h"
 #import "TKMultiSwitch.h"
 #import "TKPegSlider.h"
+#import "TKExtendedScrollView.h"
+#import "TKCurrentTimeLabel.h"
 
 
 // Network
@@ -79,6 +91,9 @@
 #import "TKReorderTableView.h"
 
 #import "TKSoundAlertController.h"
+
+#import "TKCardModalViewController.h"
+#import "TKPageControl.h"
 
 // CELLS
 #import "TKLabelCell.h"
@@ -106,6 +121,8 @@
 #import "TKCalendarMonthTableViewController.h"
 #import "TKCalendarMonthView.h"
 #import "TKCalendarDayViewController.h"
+#import "NSDate+CalendarGrid.h"
+
 
 // Coverflow
 #import "TKCoverflowView.h"
@@ -117,3 +134,4 @@
 #import "TKDecimalInputView.h"
 #import "TKDecimalInputWithNextKeyView.h"
 #import "TKNumberInputWithNextKeyView.h"
+

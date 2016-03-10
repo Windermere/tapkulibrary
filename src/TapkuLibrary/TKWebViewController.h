@@ -41,13 +41,13 @@
  @param URL A `NSURL` object that will loaded by the `UIWebView`.
  @return An initialized `TKWebViewController` object or nil if the object couldn’t be created.
  */
-- (instancetype) initWithURL:(NSURL*)URL;
+- (instancetype) initWithURL:(NSURL*)URL NS_DESIGNATED_INITIALIZER;
 
 /** Initializes a web vew controller that will load the given `URLRequest` object.
  @param URLRequest A `URLRequest` object that will loaded by the `UIWebView`.
  @return An initialized `TKWebViewController` object or nil if the object couldn’t be created.
  */
-- (instancetype) initWithURLRequest:(NSURLRequest*)URLRequest;
+- (instancetype) initWithURLRequest:(NSURLRequest*)URLRequest NS_DESIGNATED_INITIALIZER;
 
 ///----------------------------
 /// @name Properties
@@ -61,6 +61,7 @@
 /** Returns the `UIWebView`	managed by the controller object. */
 @property (nonatomic,strong) UIWebView *webView;
 
+/** Returns the `UIBarButtonItem` that shows the share sheet. */
 @property (nonatomic,strong) UIBarButtonItem *actionBarButtonItem;
 
 
@@ -69,5 +70,8 @@
  @param sender The sender of the action.
  */
 - (void) showActionSheet:(id)sender;
+
+/** A convenience method for dismissing the presented view controller. */
+- (void) dismiss:(id)sender;
 
 @end

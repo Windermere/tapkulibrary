@@ -50,7 +50,7 @@
  @param style A constant that specifies the style of table view that the controller object is to manage (`UITableViewStylePlain` or `UITableViewStyleGrouped`).
  @return An initialized `TKTableViewController` object or nil if the object couldn’t be created.
  */
-- (instancetype) initWithStyle:(UITableViewStyle)style;
+- (instancetype) initWithStyle:(UITableViewStyle)style NS_DESIGNATED_INITIALIZER;
 
 
 
@@ -71,7 +71,10 @@
 @property (nonatomic,strong) UISearchBar *searchBar;
 
 /** Returns a `UISearchDisplayController` for the search bar and table view. */
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 @property (nonatomic,strong) UISearchDisplayController *searchBarDisplayController;
+#pragma clang diagnostic pop
 
 /** The default value of this property is YES. When YES, the table view controller clears the table’s current selection when it receives a viewWillAppear: message. Setting this property to NO preserves the selection. */
 @property (nonatomic,assign) BOOL clearsSelectionOnViewWillAppear;

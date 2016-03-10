@@ -32,10 +32,10 @@
 @import UIKit;
 
 /** The direction of the shimmering on the label. */
-typedef enum {
+typedef NS_ENUM(NSInteger, TKShimmerLabelDirection) {
 	TKShimmerLabelDirectionLeftToRight,
 	TKShimmerLabelDirectionRightToLeft
-} TKShimmerLabelDirection;
+} ;
 
 /** `TKShimmerLabel` is a subclassed `UILabel` with a shimmer animation similiar to the unlock screen. */
 @interface TKShimmerLabel : UILabel
@@ -48,5 +48,9 @@ typedef enum {
 
 /** The direction the shimmer should move. */
 @property (nonatomic,assign) TKShimmerLabelDirection direction;
+
+
+/** The duration of the shimmer animation */
+@property (nonatomic,assign) NSTimeInterval shimmerDuration;
 
 @end

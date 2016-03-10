@@ -1,5 +1,5 @@
 //
-//  DaterViewController.m
+//  TKCalendarMonthViewController.m
 //  Created by Devin Ross on 7/28/09.
 //
 /*
@@ -58,7 +58,7 @@
 	return self;
 }
 - (instancetype) initWithCoder:(NSCoder *)decoder {
-    if(!(self=[super initWithCoder:decoder])) return nil;
+    if(!(self=[self initWithCoder:decoder])) return nil;
 	self.timeZone = [NSTimeZone defaultTimeZone];
 	self.sundayFirst = YES;
     return self;
